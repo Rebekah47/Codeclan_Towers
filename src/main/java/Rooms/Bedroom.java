@@ -21,6 +21,10 @@ public class Bedroom extends Room{
         return roomType;
     }
 
+    public Boolean getOccupiedStatus(){
+        return this.occupied;
+    }
+
     public void checkIn(){
         this.occupied = true;
     }
@@ -28,4 +32,5 @@ public class Bedroom extends Room{
     public void checkOut(){
         this.occupied = false;
     }
+
 }

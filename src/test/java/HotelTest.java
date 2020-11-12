@@ -6,15 +6,18 @@ import Rooms.RoomType;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 public class HotelTest {
 
-    Hotel hotel;
-    Guest guest1;
-    Guest guest2;
-    Bedroom bedroom;
-    ConferenceRoom conferenceRoom;
+   private Hotel hotel;
+   private Guest guest1;
+   private Guest guest2;
+   private Bedroom bedroom;
+   private ConferenceRoom conferenceRoom;
+   private ArrayList<Guest> party;
 
 
     @Before
@@ -24,6 +27,9 @@ public class HotelTest {
         guest2 = new Guest("Steve");
         conferenceRoom = new ConferenceRoom(300, "Donald Suite", 50);
         bedroom = new Bedroom(1, 30, RoomType.SINGLE);
+        party = new ArrayList<Guest>();
+        party.add(guest1);
+
 
     }
 
@@ -44,28 +50,28 @@ public class HotelTest {
 
     @Test
     public void canCheckGuestInBedroom(){
-        hotel.checkInGuestBedroom(guest1, bedroom);
-        assertEquals(true, bedroom.getOccupiedStatusBedrooom());
+        hotel.checkInGuestBedroom(party, bedroom);
+        assertEquals(true, bedroom.getOccupiedStatus());
     }
 
     @Test
     public void canCheckGuestInConferenceRoom(){
         hotel.checkInGuestConferenceRoom(guest2, conferenceRoom);
-        assertEquals(1, conferenceRoom.getGuests());
+        assertEquals(1, conferenceRoom.getNumberGuests());
     }
 
     @Test
     public void canCheckGuestOutBedroom(){
-        hotel.checkInGuest(guest1, bedroom);
-        hotel.checkOutGuest(guest1, bedroom);
-        assertEquals(false, bedroom.getOccupiedStatusBedrooom());
+        hotel.checkInGuestBedroom(party, bedroom);
+        hotel.checkOutGuestBedroom(bedroom);
+        assertEquals(false, bedroom.getOccupiedStatus());
     }
 
     @Test
     public void canCheckGuestOutConferenceRoom(){
-        hotel.checkInGuest(guest2, conferenceRoom);
-        hotel.checkOutGuest(guest2, conferenceRoom);
-        assertEquals(1, conferenceRoom.getGuests());
+        hotel.checkInGuestConferenceRoom(guest2, conferenceRoom);
+        hotel.checkOutGuestConferenceRoom(conferenceRoom);
+        assertEquals(0, conferenceRoom.getNumberGuests());
     }
 
 
