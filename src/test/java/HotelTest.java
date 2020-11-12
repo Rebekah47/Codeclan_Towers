@@ -2,6 +2,7 @@ import Guests.Guest;
 import Hotel.Hotel;
 import Rooms.Bedroom;
 import Rooms.ConferenceRoom;
+import Rooms.DiningRoom;
 import Rooms.RoomType;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,7 @@ public class HotelTest {
    private Bedroom bedroom;
    private ConferenceRoom conferenceRoom;
    private ArrayList<Guest> party;
+   private DiningRoom diningRoom;
 
 
     @Before
@@ -26,7 +28,8 @@ public class HotelTest {
         guest1 = new Guest("Phil");
         guest2 = new Guest("Steve");
         conferenceRoom = new ConferenceRoom(300, "Donald Suite", 50);
-        bedroom = new Bedroom(1, 30, RoomType.SINGLE);
+        bedroom = new Bedroom(1, 30, RoomType.SINGLE, 75.00);
+        diningRoom = new DiningRoom(100, 50, "Fancy Food");
         party = new ArrayList<Guest>();
         party.add(guest1);
 
@@ -72,6 +75,19 @@ public class HotelTest {
         hotel.checkInGuestConferenceRoom(guest2, conferenceRoom);
         hotel.checkOutGuestConferenceRoom(conferenceRoom);
         assertEquals(0, conferenceRoom.getNumberGuests());
+    }
+
+    @Test
+    public void canAddDiningRoomToHotel(){
+        hotel.addDiningRoom(diningRoom);
+        assertEquals(1, hotel.getNumDiningRoom());
+    }
+
+    @Test
+    public void checkOccupiedBedrooms(){
+        hotel.addBedroom(bedroom);
+        hotel.checkInGuestBedroom(party, bedroom);
+        assertEquals(0, hotel.getEmptyRooms());
     }
 
 

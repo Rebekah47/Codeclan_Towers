@@ -13,7 +13,7 @@ public class BedroomTest {
 
     @Before
     public void before(){
-        bedroom = new Bedroom(1,30, RoomType.SINGLE);
+        bedroom = new Bedroom(1,30, RoomType.SINGLE, 75.00);
     }
 
     @Test

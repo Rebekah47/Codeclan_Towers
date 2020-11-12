@@ -8,10 +8,13 @@ public abstract class Room {
 
     private int capacity;
     private ArrayList<Guest> guests;
+    private double price;
 
-    public Room(int capacity) {
+    public Room(int capacity, double price) {
         this.capacity = capacity;
+        this.price = price;
         this.guests = new ArrayList<Guest>();
+
     }
 
     public int getCapacity(){
@@ -32,5 +35,9 @@ public abstract class Room {
 
     public int getNumberGuests(){
         return this.guests.size();
+    }
+
+    public double getPrice() {
+        return price;
     }
 }

@@ -3,18 +3,22 @@ package Hotel;
 import Guests.Guest;
 import Rooms.Bedroom;
 import Rooms.ConferenceRoom;
+import Rooms.DiningRoom;
 import Rooms.Room;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Hotel {
 
     private ArrayList<Bedroom>bedrooms;
     private ArrayList<ConferenceRoom>conferenceRooms;
+    private HashMap<String, DiningRoom> diningRooms;
 
     public Hotel() {
         this.bedrooms = new ArrayList<Bedroom>();
         this.conferenceRooms = new ArrayList<ConferenceRoom>();
+        this.diningRooms = new HashMap<String, DiningRoom>();
     }
 
     public void addBedroom(Bedroom bedroom) {
@@ -61,5 +65,23 @@ public class Hotel {
 
     public void checkOutGuestConferenceRoom(ConferenceRoom conferenceRoom) {
         conferenceRoom.clearGuests();
+    }
+
+    public void addDiningRoom(DiningRoom diningRoom) {
+        diningRooms.put(diningRoom.getName(), diningRoom);
+    }
+
+    public int getNumDiningRoom() {
+        return diningRooms.size();
+    }
+
+    public int getEmptyRooms() {
+        int emptyRooms = 0;
+        for (Bedroom bedroom : bedrooms){
+            if (bedroom.getOccupiedStatus() == false){
+                emptyRooms += 1;
+            }
+        }
+        return emptyRooms;
     }
 }

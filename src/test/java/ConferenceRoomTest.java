@@ -28,6 +28,6 @@ public class ConferenceRoomTest {
 
     @Test
     public void hasPrice(){
-        assertEquals(50, conferenceRoom.getPrice());
+        assertEquals(50, conferenceRoom.getPrice(), 0.01);
     }
 }
